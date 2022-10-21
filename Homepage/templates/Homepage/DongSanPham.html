@@ -1,0 +1,53 @@
+{% extends "./base.html"%}
+
+
+{%block content%}
+
+    {%for key, value in data.items%}
+        {%if value %}
+        <div class = "container-fluid Category">
+            <!--Product Type-->
+            <div class = "row justify-content-center pt-3 pb-1 CategoryBar" style="font-family: Nunito, sans-serif;">
+                {{key.upper}}
+            </div>
+            <!--List of products-->
+            <div class="row px-2 gx-2 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 align-items-left justify-content-center" id="product-list">
+                {%for product in value%}
+                    <div class="col item-box">
+
+                        {%load static%}
+                        {% spaceless %}
+                        <a href="{%url 'OneProduct' product.Loai.Dong.Ten product.Loai.Ten product.id%}" style="text-decoration: none;" class="item-box">
+                        {% endspaceless%}
+                          <div class="card">
+                            <!--Product image-->
+                              <img class="card-img-top" src="{{ product.Anh_san_pham.url }}">
+                              <div class="card-body" >
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                  <div class="product-name d-block py-1">
+                                    {{product.Ten }}
+                                  </div>
+                                  <!-- Product price-->
+                                  <div class="product-price d-block py-2">
+
+                                    {%load humanize%}
+                                    <strong> {{product.Gia_ban_dau|intcomma}}<sup>đ</sup> </strong>
+                                  </div>
+
+                                  <div class="product-discount-price py-1 d-block">
+                                      <strong>{{ product.Gia_giam|intcomma }}<sup>đ</sup></strong>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </a>
+                  </div>
+                {%endfor%}
+
+            </div>
+        </div>
+        <hr class="px-4">
+        {%endif%}
+    {%endfor%}
+{%endblock%}

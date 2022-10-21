@@ -1,0 +1,24 @@
+
+{% extends "./base.html" %}
+{%block slider%} {%endblock slider%}
+{% block content %}
+{% for p in product %}
+{%load humanize%}
+<section class="py-lg-5 py-md-3 py-sm-2">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gy-sm-2 gx-lg-5 align-items-center">
+            <div class="card col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ p.Anh_san_pham.url }}" alt="..." /></div>
+            <div class="col-md-6 my-lg-0 my-md-4 my-sm-4">
+                <div class="mb-1" style="font-family: Nunito, sans-serif;">{{p.Loai_San_Pham.Loai_san_pham_tieng_viet}}</div>
+                <h1 class="display-5 fw-bolder" style="font-family: Nunito, sans-serif;">{{p.Ten}}</h1>
+                <div class="fs-5 mb-5">
+                    <span class="product-price me-2 pe-2" > {{p.Gia_ban_dau|intcomma}} &#8363; </span>
+                    <strong class="product-discount-price"> {{p.Gia_giam|intcomma}} &#8363; </strong>
+                </div>
+                <p class="lead" style="font-family: Nunito, sans-serif; font-size: 15px;">{{p.Mo_ta_san_pham}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{%endfor%}
+{% endblock content %}
